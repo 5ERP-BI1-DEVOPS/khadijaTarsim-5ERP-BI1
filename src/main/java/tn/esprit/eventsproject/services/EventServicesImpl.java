@@ -2,6 +2,7 @@ package tn.esprit.eventsproject.services;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import tn.esprit.eventsproject.entities.Event;
@@ -20,6 +21,8 @@ import java.util.Set;
 @Slf4j
 @RequiredArgsConstructor
 @Service
+@SpringBootApplication(scanBasePackages = {"tn.esprit.eventsproject"})
+
 public class EventServicesImpl implements IEventServices{
 
     private final EventRepository eventRepository;
