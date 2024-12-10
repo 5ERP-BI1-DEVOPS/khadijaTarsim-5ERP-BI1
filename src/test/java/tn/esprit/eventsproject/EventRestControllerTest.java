@@ -13,33 +13,33 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
-@WebMvcTest(EventRestController.class) // Spécifiez le contrôleur testé
+@WebMvcTest(EventRestController.class) // Specify the controller to test
 public class EventRestControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
 
     @Autowired
-    private ObjectMapper objectMapper; // Pour convertir les objets en JSON
+    private ObjectMapper objectMapper; // To convert objects to JSON
 
     @Test
     public void testAddParticipant() throws Exception {
-        // Créez un participant pour le test
+        // Create a participant for the test
         Participant participant = new Participant();
-        participant.setNom("Doe");
-        participant.setPrenom("John");
+        participant.setNom("tarsim");
+        participant.setPrenom("khadija");
         participant.setTache(Tache.INVITE);
 
-        // Convertir le participant en JSON
+        // Convert the participant to JSON
         String participantJson = objectMapper.writeValueAsString(participant);
 
-        // Exécuter la requête POST et valider la réponse
+        // Execute the POST request and validate the response
         mockMvc.perform(post("/event/addPart")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(participantJson))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.nom").value("tarsim"))
-                .andExpect(jsonPath("$.prenom").value("khadija"))
-                .andExpect(jsonPath("$.tache").value("INVITE"));
+                .andExpect(status().isOk()) // Expect a 200 OK status
+                .andExpect(jsonPath("$.nom").value("tarsim")) // Validate the returned `nom`
+                .andExpect(jsonPath("$.prenom").value("khadija")) // Validate the returned `prenom`
+                .andExpect(jsonPath("$.tache").value("INVITE")); // Validate the returned `tache`
     }
 }
