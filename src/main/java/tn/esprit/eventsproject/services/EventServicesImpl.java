@@ -14,10 +14,8 @@ import tn.esprit.eventsproject.repositories.LogisticsRepository;
 import tn.esprit.eventsproject.repositories.ParticipantRepository;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
+
 @Slf4j
 @RequiredArgsConstructor
 @Service
@@ -120,4 +118,31 @@ public class EventServicesImpl implements IEventServices{
         }
     }
 
+    public Event addEvent(Event testEvent) {
+        return eventRepository.save(testEvent);
+    }
+
+    public Event updateEvent(Event savedEvent) {
+        Optional<Event> existingEvent = eventRepository.findById(savedEvent.getIdEvent());
+        if (existingEvent.isPresent()) {
+            return eventRepository.save(savedEvent); // Save updates directly.
+        } else {
+            throw new IllegalArgumentException("Event with ID " + savedEvent.getIdEvent() + " not found.");
+        }
+    }
+
+    public List<Event> retrieveAllEvents() {
+        return eventRepository.findAll();
+    }
+
+    public void deleteEvent(int idEvent) {
+        // Check if the event with the given ID exists in the database
+        if (eventRepository.existsById(idEvent)) {
+            // If it exists, delete the event
+            eventRepository.deleteById(idEvent);
+        } else {
+            // If not found, throw an exception or handle the error
+            throw new IllegalArgumentException("Event with ID " + idEvent + " not found.");
+        }
+    }
 }
