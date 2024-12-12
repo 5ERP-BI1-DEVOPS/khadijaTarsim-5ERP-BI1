@@ -11,8 +11,8 @@
     <groupId>tn.esprit</groupId>
     <artifactId>eventsProject</artifactId>
     <version>1.0.0-SNAPSHOT</version>
-    <name>eventsProject</name>
-    <description>eventsProject</description>
+    <name>5ERP-BI1-khadija</name>
+    <description>Devops</description>
     <scm>
         <connection>scm:svn:http://somerepository.com/svn_repo/trunk</connection>
         <developerConnection>scm:svn:https://somerepository.com/svn_repo/trunk</developerConnection>
